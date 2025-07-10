@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>www.acerk.com</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="images\logo_acerk_1.png" alt="logo_acerk" width="100">
+        <h1>Player</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="player.html">Player</a>
+            <a href="challenge.html">Challenge</a>
+            <a href="court.html">Court</a>
+            <a href="rank.html">Rank</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Player Section</h2>
+            <img src="images\player_profile.png" alt="logo_acerk" width="300">
+            <img src="images\player_network.png" alt="logo_acerk" width="300">
+            <h3>Profile & Location:</h3>
+            <p>Basic personal details such as player name, age, gender, and active playing area.</p>
+            <h3>Self Introduction:</h3>
+            <p>A short bio where the player can describe their tennis style, skill level, preferred match types
+                (singles/doubles), and personal goals.</p>
+            <h3>Reputation:</h3>
+            <p>Community-based feedback including manner scores, recommendations, and summarized reviews from previous
+                matches.</p>
+            <h3>Available Time:</h3>
+            <p>Time slots when the player is available to play tennis (e.g., weekdays/weekends, morning/evening),
+                ideally shown in a calendar format.</p>
+            <h3>Rank Tier:</h3>
+            <p>Player’s skill level represented by a tier system such as Diamond, Platinum, Gold, Silver, or Bronze.</p>
+            <h3>Badges (Missions, Tournaments):</h3>
+            <p>Collection of achievement badges earned by completing missions, winning challenges, or participating in
+                tournaments. These can be visually displayed like collectible cards.</p>
+        </section>
+
+        <section class="crud-section">
+            <h2>Manage Players</h2>
+
+            <div class="form-group">
+                <input type="text" id="playerNameInput" placeholder="Enter player name">
+                <button onclick="addPlayer()">Add</button>
+            </div>
+
+
+
+            <ul id="playerList"></ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let players = [];
+
+        function renderPlayers() {
+            const list = document.getElementById('playerList');
+            list.innerHTML = '';
+            players.forEach((name, index) => {
+                list.innerHTML += `
+        <li>
+          <span>${name}</span>
+          <button onclick="editPlayer(${index})">Edit</button>
+          <button onclick="deletePlayer(${index})">Delete</button>
+        </li>`;
+            });
+        }
+
+        function addPlayer() {
+            const input = document.getElementById('playerNameInput');
+            const name = input.value.trim();
+            if (name) {
+                players.push(name);
+                input.value = '';
+                renderPlayers();
+            }
+        }
+
+        function deletePlayer(index) {
+            players.splice(index, 1);
+            renderPlayers();
+        }
+
+        function editPlayer(index) {
+            const newName = prompt("Edit player name:", players[index]);
+            if (newName !== null && newName.trim() !== "") {
+                players[index] = newName.trim();
+                renderPlayers();
+            }
+        }
+    </script>
+</body>
+
+</html>
